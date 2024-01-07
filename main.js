@@ -81,5 +81,12 @@ function draw () {
   })
 }
 
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'ArrowLeft') pice.position.x--
+  if (event.key === 'ArrowRight') pice.position.x++
+  if (event.key === 'ArrowDown') pice.position.y++
+})
+
 update()
 

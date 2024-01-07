@@ -45,7 +45,7 @@ const board = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
-const pice = {
+const piece = {
   position: {x: 5, y: 5},
   shape: [
     [1, 1],
@@ -71,11 +71,11 @@ function draw () {
     })
   })
 
-  pice.shape.forEach((row, y) => {
+  piece.shape.forEach((row, y) => {
     row.forEach((value, x) => {
       if ( value ) {
         context.fillStyle = 'red'
-        context.fillRect(x + pice.position.x , y + pice.position.y, 1, 1)
+        context.fillRect(x + piece.position.x , y + piece.position.y, 1, 1)
       }
     })
   })
@@ -83,10 +83,36 @@ function draw () {
 
 
 document.addEventListener('keydown', event => {
-  if (event.key === 'ArrowLeft') pice.position.x--
-  if (event.key === 'ArrowRight') pice.position.x++
-  if (event.key === 'ArrowDown') pice.position.y++
+  if (event.key === 'ArrowLeft'){
+     piece.position.x--
+     if (checkCollision()){
+      piece.position.x++
+     }
+    }
+    if (event.key === 'ArrowRight') {
+      piece.position.x++;
+      if (checkCollision()) {
+        piece.position.x--;
+      }
+    }
+    if (event.key === 'ArrowDown') {
+      piece.position.y++;
+      if (checkCollision()) {
+        piece.position.y--;
+      }
+    }
 })
+
+function checkCollision() {
+  return piece.shape.find((row, y) => {
+    return row.find((value, x) => {
+      return (
+        value !== 0 &&
+        board[y + piece.position.y]?.[x + piece.position.x] !== 0
+      )
+    })
+  })
+}
 
 update()
 

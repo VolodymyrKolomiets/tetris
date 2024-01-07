@@ -53,7 +53,26 @@ const piece = {
   ],
 }
 
-function update () {
+let dropCounter = 0
+let lastTime = 0
+
+function update (time = 0) {
+const deltaTime = time - lastTime
+lastTime = time
+
+dropCounter+=deltaTime
+
+  if (dropCounter > 1000) {
+    piece.position.y++
+    dropCounter = 0
+    
+    if (checkCollision()) {
+      piece.position.y--
+      solidifyPiece()
+      removeRows()
+    }
+  }
+
   draw()
   window.requestAnimationFrame(update)
 }

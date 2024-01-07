@@ -100,9 +100,11 @@ document.addEventListener('keydown', event => {
       if (checkCollision()) {
         piece.position.y--;
         solidifyPiece()
+        removeRows()
       }
     }
 })
+
 
 function checkCollision() {
   return piece.shape.find((row, y) => {
@@ -114,6 +116,7 @@ function checkCollision() {
     })
   })
 }
+
 
 function solidifyPiece() {
   piece.shape.forEach((row, x) => {
@@ -127,6 +130,23 @@ function solidifyPiece() {
   piece.position.x = 0
   piece.position.y = 0
 }
+
+
+function removeRows() {
+  const rowsToRemove = []
+
+  board.forEach((row, y) => {
+    if (row.every(value => value ===1)) {
+      rowsToRemove.push(y)
+    }
+  })
+
+  rowsToRemove.forEach(y => {
+    board.slice(y, 1)
+    const newRow = Array(BOARD_WIDTH).fill(0)
+    board.unshift(newRow)
+  })
+} 
 
 update()
 

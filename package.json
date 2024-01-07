@@ -11,5 +11,10 @@
   "devDependencies": {
     "standart": "^6.1.0",
     "vite": "^5.0.8"
+  },
+  "eslintConfig": {
+    "extends" :[
+      "standart"
+    ]
   }
 }

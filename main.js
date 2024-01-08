@@ -144,6 +144,27 @@ document.addEventListener('keydown', event => {
         removeRows()
       }
     }
+
+    if (event.key === 'ArrowUp') {
+      const rotated = []
+
+      for (let i = 0; i < piece.shape[0].length; i++) {
+        const row = []
+
+        for ( let j = piece.shape.length - 1; j >= 0; j--) {
+          row.push(piece.shape[j][i])
+        }
+
+        rotated.push(row)
+      }
+
+      const previusShape = piece.shape
+      piece.shape = rotated
+
+      if (checkCollision()) {
+        piece.shape = previusShape
+      }
+    }
 })
 
 

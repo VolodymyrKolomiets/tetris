@@ -7,6 +7,8 @@ const BLOCK_SIZE = 20
 const BOARD_WIDTH = 14 
 const BOARD_HEIGHT = 30
 
+let score = 0
+
 canvas.width = BLOCK_SIZE * BOARD_WIDTH
 canvas.height = BLOCK_SIZE * BOARD_HEIGHT
 
@@ -117,6 +119,7 @@ function draw () {
       }
     })
   })
+  document.querySelector('span').innerText = score
 }
 
 
@@ -214,6 +217,7 @@ function removeRows() {
     board.slice(y, 1)
     const newRow = Array(BOARD_WIDTH).fill(0)
     board.unshift(newRow)
+    score += 10
   })
 } 
 

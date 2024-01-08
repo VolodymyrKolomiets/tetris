@@ -121,18 +121,21 @@ function draw () {
 
 
 document.addEventListener('keydown', event => {
+  
   if (event.key === 'ArrowLeft'){
      piece.position.x--
      if (checkCollision()){
       piece.position.x++
      }
     }
+
     if (event.key === 'ArrowRight') {
       piece.position.x++;
       if (checkCollision()) {
         piece.position.x--;
       }
     }
+
     if (event.key === 'ArrowDown') {
       piece.position.y++;
       if (checkCollision()) {
@@ -167,8 +170,13 @@ function solidifyPiece() {
 
   piece.shape = PIECES[Math.floor(Math.random() * PIECES.length)] 
 
-  piece.position.x = 0
+  piece.position.x = Math.floor(BOARD_WIDTH / 2 - 2)
   piece.position.y = 0
+
+  if (checkCollision()) {
+    window.alert('Game over !!!')
+    board.forEach((row) => row.fill(0))
+  }
 }
 
 
